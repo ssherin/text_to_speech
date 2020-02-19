@@ -1,13 +1,26 @@
-""" python script to crop image"""
+""" python script text to speech"""
 
-from PIL import Image
+import tkinter as tk 
+from gtts import gTTS 
+from playsound import playsound
 
-left = int(input("Pixel from left : "))
-upper = int(input("Pixel from top : "))
-right = int(input("Pixel from right : "))
-lower = int(input("Pixel from bottom : "))
-img_path = str(input("Enter image path : "))
+win = tk.Tk()
+win.title("Text to Speech ")
+win.geometry("200x100")
 
-open_img = Image.open(img_path)
-crop_image = open_img.crop((left,upper,right,lower))
-crop_image.show()
+def text_to_speech():
+	text = entry.get()
+	speech = gTTS(text=text,lang="en")
+	speech.save(r'C:\Users\ssher\Desktop\kgd\text_t_speech\speech.mp3')
+	playsound(r'C:\Users\ssher\Desktop\kgd\text_t_speech\speech.mp3')
+
+label = tk.Label(win, text="Enter here : ")
+label.grid(row=0,column=0)
+
+entry = tk.Entry(win)
+entry.grid(row=1,column=0)
+
+button =tk.Button(win, text="Go",command= text_to_speech)
+button.grid(row=1,column=1)
+
+win.mainloop()
